@@ -1,0 +1,120 @@
+README
+======
+
+This is jpnevulator. What once started as a Jackpot Navigator emulator (hence
+the strange name) is now a nice serial sniffer and you can use it to send data
+on a serial line too. It's sort of like a very simple terminal emulator, like
+picocom. But jpnevulator uses hexadecimal byte values to display and send along
+the line. Very handy indeed if you are working a lot with serial protocols.
+
+Please see the INSTALL file on how to build the program. It's so easy, anyone
+should be able to do it. Just make sure you have a compiler on your computer.
+You are running a Free Operating System aren't you? Of course you are! :-)
+
+If you need any more information on how to use the program, please read the
+fine manual. Have fun!
+
+As a last note. I once did read a README file or the like from a program, if
+I'm correct it was xdm. The author asked for anyone who used and liked his 
+program to send him a postcard from the area where they live in. Of course I
+did and besides that liked the idea very much. So as a shameless act of copying
+I'm asking from you to do the same. If you like the program I would really
+love to hear from you by means of a postcard. You can send it to:
+
+	Freddy Spierenburg
+	Veluwemeer 206
+	3446 JD Woerden
+	The Netherlands
+
+Thanks in advance and again; have fun using this program!
+
+
+Thank you
+=========
+
+Thanks to Michiel van Dam for some good additional ideas. I also like to thank
+Dr. Octagon and Colonel Claypool for inspiring music while coding.
+
+Thanks to Ardor for his question which inspired a new great idea! Shame on me
+I did not came up with it myself in the first place. :)
+
+Thanks to Paul Slootman for making it possible this software is part of Debian.
+
+Thanks to Eric Shattow for his idea to use pseudo-terminal devices.
+
+Thanks to Gustavo Conrad for his feature request to monitor the serial port
+control lines. Thanks to his question I decided to write the code to enable
+it.
+
+Thanks to Duane A. Damiano for his feature request to stop reading after a
+provided amount of bytes. Enhanced the request into stopping reading and
+writing where appropriate.
+
+Thanks to Jonathan Liu for bringing to my attention that 32 is too small to use
+/dev/serial/by-id/... devices.
+
+Thanks to Michael Tautschnig for his bugreport.
+
+Thanks to Colin Foster for his --append patch.
+
+Thanks to David Binderman for his bugreport and patch.
+
+Thanks to Rolf Freitag for his bugreport.
+
+
+History
+=======
+
+The first version of jpnevulator was written around the summer of 2004, when I
+worked as a software engineer for Gaming Support. At the time I was working on
+Jackpot Junction, a visual jackpot celebration program. For testing purposes I
+needed some jackpot values that would automatically change in time, like our
+Jackpot Navigator did when coins would get played on gaming machines. I would
+then feed those values by means of a serial cable to the Jackpot Junction
+system. The first version of jpnevulator was born! It had like six different
+jackpot values it would randomly increase and all those values where sent to
+the Jackpot Junction by means of the Cham2 protocol. Here the default message
+size of 22 stems from. :-)
+
+Soon I needed a more flexible system in which I could alter bytes in any way I
+wanted, because there where more protocols to send. That's when the second
+version of the program came into shape, sort of like the --write option is
+working nowadays. It would read bytes from stdin or a file and would write them
+to a serial interface. I used this version of jpnevulator a lot of times and
+was very happy with it.
+
+Then I started working for D.A.R.E!! in the start of 2006. For some serious
+debugging of the MIPS Linux kernel serial drivers for the AMD Alchemy AU1100
+board I needed something in which I knew exactly what was sent on the serial
+line and what was not. I also needed something to read those bytes again. The
+--read option was born and worked wonderfully well. Not long after I invented
+the --read option I added support for the timing information.
+
+It was around then that I notices that jpnevulator was no longer a jackpot
+navigator emulator, but more a serial sniffer. And that it could be useful to
+other people. So that's why I released the software as Free Software. Let's
+see what happens to it...
+
+
+Copyright notice
+================
+
+Copyright (C) 2006-2015 Freddy Spierenburg
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+Freddy Spierenburg <freddy@snarl.nl>
+
+

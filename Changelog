@@ -1,0 +1,168 @@
+jpnevulator (2.2.1); urgency=low
+
+  * Applied bugfix by David Binderman that fixed two stupid bugs in
+    testing if a correct integer was given to the --width and --size options.
+    Shame on me, the bug was there ever since the very first release.
+  * Fixed some minor space usage in the README, as if anybody cares. ;)
+  * Rolf Freitag suggested to remove the calls to fcntl() and cfmakeraw() in
+    ttyOpen(). No longer will jpnevulator remove the parity settings made by
+    stty(1).
+
+ -- Freddy Spierenburg <freddy@snarl.nl>  Tue, 29 Sep 2015 21:18:55 +0200
+
+jpnevulator (2.2.0); urgency=low
+
+  * Applied patch by Colin Foster that provides --append support. Thank
+    you very much Colin!
+  * Added threading suggestion to BUGS and TODO list. Idea provided by Colin
+    Foster and Rolf Freitag. Thanks guys!
+
+ -- Freddy Spierenburg <freddy@snarl.nl>  Tue, 07 Oct 2014 19:00:24 +0200
+
+jpnevulator (2.1.3); urgency=low
+
+  * Fixed debian/changelog since it was missing the information on closing
+    Debian bug #748568.
+
+ -- Freddy Spierenburg <freddy@snarl.nl>  Tue, 05 Aug 2014 21:39:36 +0200
+
+jpnevulator (2.1.2); urgency=low
+
+  * Jonathan Liu requested an increase in interface name and alias length:
+      "Buffer size 32 is too small for /dev/serial/by-id/... devices."
+
+ -- Freddy Spierenburg <freddy@snarl.nl>  Thu, 12 Jun 2014 18:49:13 +0200
+
+jpnevulator (2.1.1); urgency=low
+
+  * Fixed segmentation fault using -o option and checked if any other
+    option had the same problem, which of course turned out to be the
+    case.
+
+ -- Freddy Spierenburg <freddy@snarl.nl>  Mon, 06 Aug 2012 21:20:35 +0200
+
+jpnevulator (2.1.0); urgency=low
+
+  * Fixed lintian problems.
+
+  * Added support for --count option. This makes the software exit after
+    reading / writing the given amount of bytes.
+
+ -- Freddy Spierenburg <freddy@snarl.nl>  Sun, 05 Aug 2012 22:47:38 +0200
+
+jpnevulator (2.0.3); urgency=low
+
+  * Fixed help output, --control-enable should be --control and options
+    should be using a '=' character in between option and value. Thanks
+    to Gustavo Conrad for sending me a bug report!
+
+ -- Freddy Spierenburg <freddy@snarl.nl>  Wed, 09 May 2012 21:25:05 +0200
+
+jpnevulator (2.0.2); urgency=low
+
+  * Fixed small --timing-delta bug.
+
+ -- Freddy Spierenburg <freddy@snarl.nl>  Tue, 17 Apr 2012 18:51:18 +0200
+
+jpnevulator (2.0.1); urgency=low
+
+  * This time increased the software version number for real. :(
+  * Fixed a small time output bug.
+
+ -- Freddy Spierenburg <freddy@snarl.nl>  Mon, 16 Apr 2012 18:25:08 +0200
+
+jpnevulator (2.0.0); urgency=low
+
+  * Added pseudo-terminal device support.
+  * Added support to monitor modem control bits.
+  * Fixed typo in manual page.
+
+ -- Freddy Spierenburg <freddy@snarl.nl>  Sun, 15 Apr 2012 23:26:33 +0200
+
+jpnevulator (1.3.1); urgency=low
+
+  * Fixed spelling error in TODO file.
+  * Fixed typo in manual page.
+  * Fixed typo and current home address in README file.
+  * Fixed many many Debian lintian errors and even some compile warnings.
+  * Finally added a FAQ file.
+
+ -- Freddy Spierenburg <freddy@snarl.nl>  Sat, 21 Jan 2012 23:54:20 +0100
+
+jpnevulator (1.3.0); urgency=low
+
+  * Added the --pass option. A great idea mailed to me by Ardor.
+  * Nicely use bool_t in a consequent manner.
+  * Fixed a stupid typo bug in tty.h. It only became a compiler bug
+  * since I now changed the tty variable into ttyReader. Stupid me!
+
+ -- Freddy Spierenburg <freddy@snarl.nl>  Wed, 22 Apr 2009 19:08:22 +0200
+
+jpnevulator (1.2.3); urgency=low
+
+  * Fixed some typo's in debian/control.
+  * FIxed some typo's in the manual page and the files BUGS and README.
+
+ -- Freddy Spierenburg <freddy@snarl.nl>  Fri, 21 Jul 2006 15:17:52 +0200
+
+jpnevulator (1.2.2); urgency=low
+
+  * Fixed some compiler warnings; isblank() and combination printf() and
+    sizeof().
+
+ -- Freddy Spierenburg <freddy@snarl.nl>  Mon, 17 Jul 2006 00:04:54 +0200
+
+jpnevulator (1.2.1); urgency=low
+
+  * Compressed manual page with best compression.
+  * Changed description in Debian control file.
+
+ -- Freddy Spierenburg <freddy@snarl.nl>  Sun, 25 Jun 2006 16:06:32 +0200
+
+jpnevulator (1.2.0); urgency=low
+
+  * Fixed small bug in list.c; listDestory() should also zero
+    the number of elements in the list.
+  * Fixed a bug; the --byte-count option now works correct.
+  * Added a timeout for the display of ASCII data.
+
+ -- Freddy Spierenburg <freddy@snarl.nl>  Sun, 25 Jun 2006 14:05:43 +0200
+
+jpnevulator (1.1.0); urgency=low
+
+  * Added support for --delay-byte. This option waits the given amount of
+    microseconds in between the sending of every input byte.
+  * Renamed the --delay option to --delay-line.
+
+ -- Freddy Spierenburg <freddy@snarl.nl>  Sat, 03 Jun 2006 10:54:03 +0200
+
+jpnevulator (1.0.3); urgency=low
+
+  * Added support for --byte-count. This option writes a nice index
+    number of the bytes received.
+  * Written a nice manual page.
+
+ -- Freddy Spierenburg <freddy@snarl.nl>  Sat, 03 Jun 2006 02:41:12 +0200
+
+jpnevulator (1.0.2); urgency=medium
+
+  * Added support for aliasing of the tty names in the printing. Just
+    give --tty "/dev/ttyS0:Motorola MTM800" and the printing of data
+    will use Motorola MTM800 instead of /dev/ttyS0. If you need another
+    separator then ':' use the --alias-separator option. Any string of
+    characters can be used.
+
+ -- Freddy Spierenburg <freddy@snarl.nl>  Thu, 01 Jun 2006 21:42:09 +0200
+
+jpnevulator (1.0.1); urgency=medium
+
+  * Bugfix. Using one tty the --timing-print option didn't worked correctly
+    anymore.
+
+ -- Freddy Spierenburg <freddy@snarl.nl>  Thu, 01 Jun 2006 11:35:10 +0200
+
+jpnevulator (1.0.0); urgency=low
+
+  * Initial release.
+
+ -- Freddy Spierenburg <freddy@snarl.nl>  Tue, 30 May 2006 21:56:54 +0200

@@ -1,0 +1,108 @@
+jpnevulator (2.2.1-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Freddy Spierenburg <freddy@snarl.nl>  Tue, 29 Sep 2015 21:18:55 +0200
+
+jpnevulator (2.2.0-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Freddy Spierenburg <freddy@snarl.nl>  Tue, 07 Oct 2014 19:00:24 +0200
+
+jpnevulator (2.1.3-1) unstable; urgency=low
+
+  * New upstream release.
+  * Fixed the conflicting parameter types, closes: bug#748568.
+    Actually this bug was already solved in version 2.1.2-1, but my
+    Debian mentor was not happy with that release, since it was
+    missing the information about this closed bug. He once again
+    was right and is hopefully happy with this release.
+
+ -- Freddy Spierenburg <freddy@snarl.nl>  Tue, 05 Aug 2014 21:39:36 +0200
+
+jpnevulator (2.1.2-1) unstable; urgency=low
+
+  * New release.
+
+ -- Freddy Spierenburg <freddy@snarl.nl>  Thu, 12 Jun 2014 18:49:13 +0200
+
+jpnevulator (2.1.1-1) unstable; urgency=low
+
+  * New release.
+
+ -- Freddy Spierenburg <freddy@snarl.nl>  Mon, 06 Aug 2012 21:20:35 +0200
+
+jpnevulator (2.1.0-1) unstable; urgency=low
+
+  * New release.
+
+ -- Freddy Spierenburg <freddy@snarl.nl>  Sun, 05 Aug 2012 22:47:38 +0200
+
+jpnevulator (2.0.3-1) unstable; urgency=low
+
+  * New release.
+
+ -- Freddy Spierenburg <freddy@snarl.nl>  Wed, 09 May 2012 21:25:05 +0200
+
+jpnevulator (2.0.2-1) unstable; urgency=low
+
+  * New release.
+
+ -- Freddy Spierenburg <freddy@snarl.nl>  Tue, 17 Apr 2012 18:51:18 +0200
+
+jpnevulator (2.0.1-1) unstable; urgency=low
+
+  * New release.
+
+ -- Freddy Spierenburg <freddy@snarl.nl>  Mon, 16 Apr 2012 18:25:08 +0200
+
+jpnevulator (2.0.0-1) unstable; urgency=low
+
+  * New release.
+
+ -- Freddy Spierenburg <freddy@snarl.nl>  Sun, 15 Apr 2012 23:26:33 +0200
+
+jpnevulator (1.3.1-1) unstable; urgency=low
+
+  * New release.
+
+ -- Freddy Spierenburg <freddy@snarl.nl>  Sun, 22 Jan 2012 00:14:01 +0100
+
+jpnevulator (1.3.0-1) unstable; urgency=low
+
+  * New release.
+
+ -- Freddy Spierenburg <freddy@snarl.nl>  Sat, 25 Apr 2009 13:00:53 +0200
+
+jpnevulator (1.2.3-1) unstable; urgency=low
+
+  * New upstream release.
+  * First official upload to Debian, closes bug#378671.
+
+ -- Freddy Spierenburg <freddy@snarl.nl>  Fri, 21 Jul 2006 15:17:27 +0200
+
+jpnevulator (1.2.2-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Freddy Spierenburg <freddy@snarl.nl>  Mon, 17 Jul 2006 00:20:47 +0200
+
+jpnevulator (1.2.1-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Freddy Spierenburg <freddy@snarl.nl>  Sun, 25 Jun 2006 16:08:19 +0200
+
+jpnevulator (1.2.0-1) unstable; urgency=low
+
+  * New upstream version.
+
+ -- Freddy Spierenburg <freddy@snarl.nl>  Sun, 25 Jun 2006 14:10:55 +0200
+
+jpnevulator (1.1.0-1) unstable; urgency=low
+
+  * Initial release.
+
+ -- Freddy Spierenburg <freddy@snarl.nl>  Sat,  3 Jun 2006 15:34:17 +0200
+

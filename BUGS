@@ -1,0 +1,58 @@
+BUGS
+====
+
+This file describes several bugs known as of today. There do exist probably
+some more, but I'm not aware of them right now. Do not hesitate to send me
+<freddy@snarl.nl> your bug-reports though. I will gladly add them to this file
+and maybe even solve some of them. :-)
+
+
+Order of bytes broke when reading several tty devices at once
+=============================================================
+
+The display of incoming bytes can be broke if you use multiple tty devices to
+read from. At the moment I do not have a solution for this problem. Since I use
+select() to watch the several tty devices and after the select() I have to
+read() them one by one, I can not completely 100% display which bytes came after
+which on different tty devices. Take the example below:
+
+	$ jpnevulator --ascii --timing-print --tty /dev/ttyS0 --tty /dev/ttyUSB0 --read
+	2006-05-30 13:23:49.461075: /dev/ttyS0
+	00 00 05 3B 0D 00 00 05                         ...;....
+	2006-05-30 13:23:49.461113: /dev/ttyUSB0
+	00 05 3B 0D 00 00 05 3B 0D                      ..;....;.
+	2006-05-30 13:23:49.473074: /dev/ttyS0
+	3B 0D 00 00 05 3B 0D                            ;....;.
+	2006-05-30 13:23:49.473105: /dev/ttyUSB0
+	00 12 05 06 39 00 12 05 06 39 1F 00 22 80 00 0E ....9....9.."...
+	$
+
+And now see the order in which things really got sent on the line:
+
+	/dev/ttyS0:
+	00 00 05 3B 0D
+	/dev/ttyUSB0:
+	00 00 05 3B 0D
+	/dev/ttyS0:
+	00 00 05 3B 0D
+	/dev/ttyUSB0:
+	00 00 05 3B 0D
+	/dev/ttyS0:
+	00 00 05 3B 0D
+	/dev/ttyUSB0:
+	00 00 05 3B 0D 00 12 05 06 39 00 12 05 06 39 ...
+
+As you can see /dev/ttyUSB0 receives the echo of all things sent by /dev/ttyS0.
+This is exactly what happens. But since there does exist a small time between
+the select() who is happy expressing something is available and the read() who
+does get the available data, some extra data will be available. I have no idea
+on how I can use high level system call like select() and read() and be still
+able to put the bytes in the correct order. Anyone an idea?
+
+During the course of 2014 I've received a suggestion from both Colin Foster and
+Rolf Freitag to use threads to solve this problem. Just create a thread for every
+reading process and a thread for the writing process. I myself am a little bit
+sceptic about the solution, as I expect we are only moving the problem away into
+the kernel. But it might be worth trying to implement this idea. Since it's quiet
+a big change to the core of the software I do not expect myself to dive into it.
+But maybe my future self thinks differently. ;)

@@ -1,0 +1,37 @@
+TODO
+====
+
+This is the TODO file. Some of these things will eventually happen too. :)
+
+2014-10-06: 6
+	Implement the threading solution to the order BUG. Don't expect me
+	to put time into this anytime soon, but I'm open to patches. :)
+
+
+DONE
+====
+2006-05-30: 0 (2006-06-02)
+	Create --index option. This way some sort of index numbers will appear
+	in front of all the read bytes. Might be handy with referencing.
+
+	The option is named --byte-count instead of --index.
+
+2006-05-30: 2 (2006-06-03)
+	Write a decent manual page.
+
+2006-05-30: 5 (2006-05-30)
+	Release the whole software.
+
+2006-05-30: 4 (2006-05-30)
+	Setup a nice website and mailing list.
+
+	Waited with a mailing list untill some users demand it.
+
+2006-05-30: 1 (2006-06-03)
+	Add --byte-delay option. This creates a delay between the sending of each
+	byte in a line. Idea courtesy of Michiel van Dam.
+
+2006-05-30: 3 (2006-06-06)
+	Create a Debian package.
+
+

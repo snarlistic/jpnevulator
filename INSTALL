@@ -1,0 +1,28 @@
+INSTALL
+=======
+
+This file contains information on how to build and install jpnevulator on your
+computer. For run-time information, check the README file and the manual page.
+
+See the homepage for jpnevulator http://jpnevulator.snarl.nl/ for more
+information.
+
+
+Download
+========
+
+The latest version of the software is available from
+http://jpnevulator.snarl.nl/. At this moment there do not exist any
+pre-compiled binaries. Building jpnevulator is so easy that anybody interested
+in the program should be able to do it.
+
+
+Compiling
+=========
+
+	$ make
+
+After this make you will have a binary called jpnevulator in the main source
+directory. You can copy this binary everywhere you like.
+
+

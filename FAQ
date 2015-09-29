@@ -1,0 +1,30 @@
+FAQ
+===
+
+This is actually a quiet lousy FAQ with only one question answered. But the
+truth is that only one question is asked frequently.
+
+Q: Your serial tool seems to block my application. What am I doing wrong?
+
+A: First the bad news: It's impossible for two GNU/Linux processes to open the
+   same serial port at the same time. Doing so results in undefined behaviour like
+   you just experienced.
+
+   Jpnevulator was never built to sit in between the kernel and your
+   application. I'm sorry.
+
+   The way I have used Jpnevulator over and over again, was with a special self
+   (not entirely myself, but a colleague of mine) made device that sort of sits
+   in between a serial cable. Out of the device comes another serial cable that
+   mirrors everything that is sent over the original serial cable. A sort of
+   man in the middle.
+
+   Now with a little bit of luck some good news: A little while ago Eric Shattow
+   suggested to use pseudo-terminal devices to sit in between the kernel and your
+   application. Unfortunately it's still impossible to work with speed changes
+   that way and hence Eric never replied when I asked him what he did think of
+   the solution I provided to him. So this pseudo-terminal device support is
+   not tested very well, only in a limited way by me. It works and I think it's
+   even relatively easy to use stty to detect speed changes and act upon it. I
+   leave that as an exercise to the reader, but I would love to hear from anyone
+   having done it.
