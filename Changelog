@@ -1,3 +1,10 @@
+jpnevulator (***); urgency=low
+
+  * Fixed lintian warning (out-of-date-standards-version). Thank you Paul
+    Slootman!
+
+ -- Freddy Spierenburg <freddy@snarl.nl>  *** not yet released ***
+
 jpnevulator (2.2.1); urgency=low
 
   * Applied bugfix by David Binderman that fixed two stupid bugs in

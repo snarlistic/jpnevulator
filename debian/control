@@ -4,7 +4,7 @@ Section: comm
 Priority: optional
 Maintainer: Freddy Spierenburg <freddy@snarl.nl>
 Build-Depends: debhelper (>= 5)
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 
 Package: jpnevulator
 Architecture: any
