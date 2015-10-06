@@ -60,6 +60,7 @@ struct jpnevulatorOptions {
 	int count;
 	bool_t append;
 	char *appendSeparator;
+	bool_t displayBits;
 };
 
 enum optionsRtrn {

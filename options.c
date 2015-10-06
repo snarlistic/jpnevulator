@@ -40,7 +40,7 @@ static void usage(void) {
 		"         [--read] [--write] [--timing-print] [--timing-delta=microseconds]\n"
 		"         [--ascii] [--alias-separator=separator] [--byte-count]\n"
 		"         [--append] [--append-separator=separator] [--control]\n"
-		"         [--control-poll=microseconds] [--count=bytes] <file>\n",
+		"         [--control-poll=microseconds] [--count=bytes] [--bits] <file>\n",
 		PROGRAM_NAME
 	);
 }
@@ -122,6 +122,9 @@ static void optionsDefault(void) {
 
 	/* By default the append separator is a simple newline. */
 	_jpnevulatorOptions.appendSeparator="\n";
+
+	/* By default, do not print bits instead of hex bytes values */
+	boolReset(_jpnevulatorOptions.displayBits);
 }
 
 static void optionsIOWrite(char *file) {
@@ -141,6 +144,7 @@ enum optionsRtrn optionsParse(int argc,char **argv) {
 			{"append",no_argument,NULL,'A'},
 			{"ascii",no_argument,NULL,'a'},
 			{"byte-count",no_argument,NULL,'b'},
+			{"bits",no_argument,NULL,'B'},
 			{"checksum",no_argument,NULL,'c'},
 			{"control",no_argument,NULL,'C'},
 			{"control-poll",required_argument,NULL,'D'},
@@ -184,6 +188,10 @@ enum optionsRtrn optionsParse(int argc,char **argv) {
 			}
 			case 'b': {
 				boolSet(_jpnevulatorOptions.byteCountDisplay);
+				break;
+			}
+			case 'B': {
+				boolSet(_jpnevulatorOptions.displayBits);
 				break;
 			}
 			case 'c': {
