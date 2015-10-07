@@ -172,7 +172,7 @@ enum optionsRtrn optionsParse(int argc,char **argv) {
 			{"crc8",optional_argument,NULL,'z'},
 			{NULL,no_argument,NULL,0}
 		};
-		option=getopt_long(argc,argv,"aAbcCd:D:e:f:ghi:jk:l:no:pPq:rs:S:t:vwy:z:",long_options,&option_index);
+		option=getopt_long(argc,argv,"aAbBcCd:D:e:f:ghi:jk:l:no:pPq:rs:S:t:vwy:z:",long_options,&option_index);
 		switch(option) {
 			case -1: {
 				finished=!finished;
