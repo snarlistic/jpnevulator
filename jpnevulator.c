@@ -205,14 +205,19 @@ enum jpnevulatorRtrn jpnevulatorWrite(void) {
 #undef jpnevulatorGarbageCollect
 
 static void printBytesBits(FILE *output, unsigned char byte) {
-	unsigned char iter = 0;
-	unsigned char bits[8];
+        unsigned char iter = 0;
+        unsigned char bits[8];
 
-	bits[0] = byte%2 + '0';
-	for(iter=1;iter<8;++iter) {
-		bits[7-iter] = (byte/(iter*2))%2 + '0';
-	}
-	fprintf(output,"%s",bits);
+        bits[7] = byte%2 + '0';
+        for(iter=1;iter<8;++iter) {
+                unsigned char i = 0;
+                unsigned char tmp;
+                tmp = byte;
+                for(i=0;i<iter;++i)
+                     tmp /= 2;
+                bits[7-iter] = tmp%2 + '0';
+        }
+        fprintf(output,"%s",bits);
 }
 
 static void asciiWrite(FILE *output,char *ascii,int asciiSize,int *bytesWritten,bool_t fill) {
