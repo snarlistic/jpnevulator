@@ -204,13 +204,27 @@ enum jpnevulatorRtrn jpnevulatorWrite(void) {
 }
 #undef jpnevulatorGarbageCollect
 
+static void printBytesBits(FILE *output, unsigned char byte) {
+	unsigned char iter = 0;
+	unsigned char bits[8];
+
+	bits[0] = byte%2 + '0';
+	for(iter=1;iter<8;++iter) {
+		bits[7-iter] = (byte/(iter*2))%2 + '0';
+	}
+	fprintf(output,"%s",bits);
+}
+
 static void asciiWrite(FILE *output,char *ascii,int asciiSize,int *bytesWritten,bool_t fill) {
 	if((*bytesWritten)!=0) {
 		if(boolIsSet(_jpnevulatorOptions.ascii)) {
 			if(boolIsSet(fill)) {
 				int index;
 				for(index=*bytesWritten;index<_jpnevulatorOptions.width;index++) {
-					fprintf(output,"   ");
+					if(boolIsSet(_jpnevulatorOptions.displayBits))
+						fprintf(output,"        ");
+					else
+						fprintf(output,"   ");
 				}
 			}
 			fprintf(output,"\t%s",ascii);
@@ -480,7 +494,10 @@ enum jpnevulatorRtrn jpnevulatorRead(void) {
 								if((bytesWritten==0)&&boolIsSet(_jpnevulatorOptions.byteCountDisplay)) {
 									fprintf(output,"%08lX\t",interfaceReader->byteCount);
 								}
-								fprintf(output,"%02X",message[index]);
+								if(boolIsSet(_jpnevulatorOptions.displayBits))
+									printBytesBits(output,message[index]);
+								else
+									fprintf(output,"%02X",message[index]);
 								/* Increase the byte count for this interface. */
 								interfaceReader->byteCount++;
 								if(boolIsSet(_jpnevulatorOptions.ascii)) {
