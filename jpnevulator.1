@@ -1,4 +1,4 @@
-.TH JPNEVULATOR "1" "December 2015" "jpnevulator 2.3.0" "User Commands"
+.TH JPNEVULATOR "1" "December 2015" "jpnevulator 2.3.1" "User Commands"
 .SH NAME
 jpnevulator \- Just another serial sniffer
 .SH SYNOPSIS
@@ -22,6 +22,22 @@ possible to pass(\-\-pass) on the data between the several serial devices.
 Mandatory arguments to long options are mandatory for short options too.
 .PP
 Generic options:
+.TP
+\fB\-B\fR, \fB\-\-base\fR=\fIBASE\fR
+Specify the base unit of read/write bytes. Currently only 2=binary and 16=hexadecimal
+are supported. The default base unit is hexadecimal.
+
+Selecting hexadecimal as the base unit, the input format is FD or 0xFD. Of
+course all input is treated case-insensitive. Spaces may or may not be included
+in the input. So DEADBEEF is exactly the same as DE AD   BE  EF.
+
+Selecting binary as the base unit, the input format is 01000010. Spaces may or
+may not be included in the input. So 01000010111 is exactely the same as
+01000010 111. Yes, that's right! It's perfectly fine to write less than 8 bits,
+excluding the leading zeros. Please understand if doing so, spaces are needed
+to separate the individual bytes in this case, but that's obvious. If no spaces
+are used, the parses reads the first 8 bits before it continues with the next, as
+shown in the example above.
 .TP
 \fB\-l\fR, \fB\-\-alias\-separator\fR
 Use the given string as the alias separator. See \-\-tty for more information.
@@ -70,22 +86,6 @@ Besides the normal output also display an extra column with the current
 index number of the byte in the output. These numbers are displayed in front
 of the normal output. When readin from multiple serial devices at the same
 time the index number will increase per serial device.
-.TP
-\fB\-B\fR, \fB\-\-base\fR=\fIBASE\fR
-Specify the base unit of read/write bytes. Currently only 2=binary and 16=hexadecimal
-are supported. The default base unit is hexadecimal.
-
-Selecting hexadecimal as the base unit, the input format is FD or 0xFD. Of
-course all input is treated case-insensitive. Spaces may or may not be included
-in the input. So DEADBEEF is exactly the same as DE AD   BE  EF.
-
-Selecting binary as the base unit, the input format is 01000010. Spaces may or
-may not be included in the input. So 01000010111 is exactely the same as
-01000010 111. Yes, that's right! It's perfectly fine to write less than 8 bits,
-excluding the leading zeros. Please understand if doing so, spaces are needed
-to separate the individual bytes in this case, but that's obvious. If no spaces
-are used, the parses reads the first 8 bits before it continues with the next, as
-shown in the example above.
 .TP
 \fB\-C\fR, \fB\-\-control\fR
 Monitor modem control bits (line enable, data terminal ready, request to send,

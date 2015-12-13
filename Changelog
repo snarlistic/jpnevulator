@@ -1,3 +1,10 @@
+jpnevulator (2.3.1); urgency=low
+
+  * Moved the --base option to the generic options section instead of the
+    read options section.
+
+ -- Freddy Spierenburg <freddy@snarl.nl>  Mon, 14 Dec 2015 00:31:08 +0100
+
 jpnevulator (2.3.0); urgency=low
 
   * Fixed lintian warning (out-of-date-standards-version). Thank you Paul
