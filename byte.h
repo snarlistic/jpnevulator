@@ -25,6 +25,20 @@ enum byteRtrn {
 	byteRtrnUnknown
 };
 
-extern int byteGet(FILE *);
+#define BASES \
+	base2 \
+	base16
+
+#define base2 BASE(2,byteBaseBinary,8)
+#define base16 BASE(16,byteBaseHexadecimal,2)
+
+enum byteBase {
+#define BASE(base,name,width) name=base,
+	BASES
+#undef BASE
+};
+
+extern int byteGet(FILE *,enum byteBase);
+extern void bytePut(FILE *,enum byteBase,unsigned char);
 
 #endif

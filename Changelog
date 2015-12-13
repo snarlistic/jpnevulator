@@ -1,9 +1,11 @@
-jpnevulator (***); urgency=low
+jpnevulator (2.3.0); urgency=low
 
   * Fixed lintian warning (out-of-date-standards-version). Thank you Paul
     Slootman!
+  * Added the --base option, a re-implementation of the patch Ark444
+    sent me in my first GitHub Pull Request.
 
- -- Freddy Spierenburg <freddy@snarl.nl>  *** not yet released ***
+ -- Freddy Spierenburg <freddy@snarl.nl>  Sun, 13 Dec 2015 22:37:37 +0100
 
 jpnevulator (2.2.1); urgency=low
 

@@ -30,6 +30,7 @@
 #include "interface.h"
 #include "tty.h"
 #include "pty.h"
+#include "byte.h"
 
 static void usage(void) {
 	printf(
@@ -40,7 +41,7 @@ static void usage(void) {
 		"         [--read] [--write] [--timing-print] [--timing-delta=microseconds]\n"
 		"         [--ascii] [--alias-separator=separator] [--byte-count]\n"
 		"         [--append] [--append-separator=separator] [--control]\n"
-		"         [--control-poll=microseconds] [--count=bytes] [--bits] <file>\n",
+		"         [--control-poll=microseconds] [--count=bytes] [--base] <file>\n",
 		PROGRAM_NAME
 	);
 }
@@ -123,8 +124,8 @@ static void optionsDefault(void) {
 	/* By default the append separator is a simple newline. */
 	_jpnevulatorOptions.appendSeparator="\n";
 
-	/* By default, do not print bits instead of hex bytes values */
-	boolReset(_jpnevulatorOptions.displayBits);
+	/* By default, read/write hex byte values. */
+	_jpnevulatorOptions.base=byteBaseHexadecimal;
 }
 
 static void optionsIOWrite(char *file) {
@@ -132,6 +133,22 @@ static void optionsIOWrite(char *file) {
 	charactersPrinted=sprintf(_jpnevulatorOptions.io,"%.*s",(int)sizeof(_jpnevulatorOptions.io)-1,file);
 	if(charactersPrinted!=strlen(file)) {
 		fprintf(stderr,"%s: Filename truncated to %d chars\n",PROGRAM_NAME,charactersPrinted);
+	}
+}
+
+static void optionsBaseWrite(char *base) {
+	switch(atoi(base)) {
+#define BASE(xbase,name,width) \
+		case xbase: { \
+			_jpnevulatorOptions.base=name; \
+			break; \
+		}
+		BASES
+#undef BASE
+		default: {
+			fprintf(stderr,"%s: Unsupported base unit selected, cowardly using default base(=%d) unit.\n",PROGRAM_NAME,_jpnevulatorOptions.base);
+			break;
+		}
 	}
 }
 
@@ -144,7 +161,7 @@ enum optionsRtrn optionsParse(int argc,char **argv) {
 			{"append",no_argument,NULL,'A'},
 			{"ascii",no_argument,NULL,'a'},
 			{"byte-count",no_argument,NULL,'b'},
-			{"bits",no_argument,NULL,'B'},
+			{"base",required_argument,NULL,'B'},
 			{"checksum",no_argument,NULL,'c'},
 			{"control",no_argument,NULL,'C'},
 			{"control-poll",required_argument,NULL,'D'},
@@ -172,7 +189,7 @@ enum optionsRtrn optionsParse(int argc,char **argv) {
 			{"crc8",optional_argument,NULL,'z'},
 			{NULL,no_argument,NULL,0}
 		};
-		option=getopt_long(argc,argv,"aAbBcCd:D:e:f:ghi:jk:l:no:pPq:rs:S:t:vwy:z:",long_options,&option_index);
+		option=getopt_long(argc,argv,"aAbB:cCd:D:e:f:ghi:jk:l:no:pPq:rs:S:t:vwy:z:",long_options,&option_index);
 		switch(option) {
 			case -1: {
 				finished=!finished;
@@ -191,7 +208,7 @@ enum optionsRtrn optionsParse(int argc,char **argv) {
 				break;
 			}
 			case 'B': {
-				boolSet(_jpnevulatorOptions.displayBits);
+				optionsBaseWrite(optarg);
 				break;
 			}
 			case 'c': {

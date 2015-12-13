@@ -61,6 +61,10 @@ Thanks to David Binderman for his bugreport and patch.
 
 Thanks to Rolf Freitag for his bugreport.
 
+Thanks to Ark444 for his GitHub Pull Request, he was the first! His patch
+provided binary output and I rewrote it so both the read and write mode of
+the software are able to use the binary format, see --base option.
+
 
 History
 =======

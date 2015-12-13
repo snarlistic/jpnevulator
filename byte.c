@@ -25,71 +25,58 @@
 
 #include "byte.h"
 
-/* Convert an ASCII character into a binary form. */
-static char nibbleGet(char c) {
-	return(isdigit(c)?c-'0':toupper(c)-'A'+0xA);
-}
+#define isBinaryDigit(digit) ((digit=='0')||(digit=='1'))
+#define bitGet(digit) (digit-'0')
 
-enum byteState {
-	byteStateComplete=0,
-	byteStateNibbleFirst,
-	byteStateHexNotation,
-	byteStateNibbleSecond,
-	byteStateError
+enum byteStateBinary {
+	byteStateBinaryComplete=0,
+	byteStateBinaryBitsIncomplete,
+	byteStateBinaryError
 };
-int byteGet(FILE *fd) {
+int byteBaseBinaryGet(FILE *fd) {
 	int byte;
-	enum byteState state;
+	int bitsRead;
+	enum byteStateBinary state;
+
 	/* No real reason to do this, but it makes the compiler happy. If this next line is not
 	   here the compiler generates this warning below:
 
-	   byte.c:76:16: warning: ‘byte’ may be used uninitialized in this function [-Wuninitialized]
+	     warning: ‘byte’ may be used uninitialized in this function [-Wuninitialized]
 
 	   So let's initialize byte anyway.
 	*/
 	byte=0;
 
-	for(state=byteStateNibbleFirst;state!=byteStateComplete;) {
+	for(bitsRead=0,state=byteStateBinaryBitsIncomplete;state!=byteStateBinaryComplete;) {
 		static int character;
 		switch(state) {
-			case byteStateNibbleFirst: {
-				character=fgetc(fd);
-				if(isxdigit(character)) {
-					byte=nibbleGet(character);
-					if(character=='0') {
-						state=byteStateHexNotation;
+			case byteStateBinaryBitsIncomplete: {
+				if(bitsRead<8) {
+					character=fgetc(fd);
+					if(isBinaryDigit(character)) {
+						byte=(byte<<1)|bitGet(character);
+						bitsRead++;
+					} else if(isblank(character)) {
+						if(bitsRead) {
+							state=byteStateBinaryComplete;
+						}
 					} else {
-						state=byteStateNibbleSecond;
+						if(bitsRead) {
+							if(ungetc(character,fd)!=EOF) {
+								state=byteStateBinaryComplete;
+							} else {
+								state=byteStateBinaryError;
+							}
+						} else {
+							state=byteStateBinaryError;
+						}
 					}
-				} else if(!isblank(character)) {
-					state=byteStateError;
-				}
-				break;
-			}
-			case byteStateHexNotation: {
-				character=fgetc(fd);
-				if(tolower(character)=='x') {
-					state=byteStateNibbleFirst;
 				} else {
-					if(ungetc(character,fd)!=EOF) {
-						state=byteStateNibbleSecond;
-					} else {
-						state=byteStateError;
-					}
+					state=byteStateBinaryComplete;
 				}
 				break;
 			}
-			case byteStateNibbleSecond: {
-				character=fgetc(fd);
-				if(isxdigit(character)) {
-					byte=(byte<<4)+nibbleGet(character);
-					state=byteStateComplete;
-				} else {
-					state=byteStateError;
-				}
-				break;
-			}
-			case byteStateError: {
+			case byteStateBinaryError: {
 				switch(character) {
 					case EOF: {
 						byte=byteRtrnEOF;
@@ -104,10 +91,10 @@ int byteGet(FILE *fd) {
 						break;
 					}
 				}
-				state=byteStateComplete;
+				state=byteStateBinaryComplete;
 				break;
 			}
-			case byteStateComplete: {
+			case byteStateBinaryComplete: {
 				/* Do nothing, since it's impossible to reach this stage. Just
 				 * make the compiler happy. */
 				break;
@@ -115,4 +102,144 @@ int byteGet(FILE *fd) {
 		}
 	}
 	return(byte);
+}
+
+/* Convert an ASCII character into a binary form. */
+static char nibbleGet(char c) {
+	return(isdigit(c)?c-'0':toupper(c)-'A'+0xA);
+}
+
+enum byteStateHexadecimal {
+	byteStateHexadecimalComplete=0,
+	byteStateHexadecimalNibbleFirst,
+	byteStateHexadecimalHexNotation,
+	byteStateHexadecimalNibbleSecond,
+	byteStateHexadecimalError
+};
+int byteBaseHexadecimalGet(FILE *fd) {
+	int byte;
+	enum byteStateHexadecimal state;
+	/* No real reason to do this, but it makes the compiler happy. If this next line is not
+	   here the compiler generates this warning below:
+
+	     warning: ‘byte’ may be used uninitialized in this function [-Wuninitialized]
+
+	   So let's initialize byte anyway.
+	*/
+	byte=0;
+
+	for(state=byteStateHexadecimalNibbleFirst;state!=byteStateHexadecimalComplete;) {
+		static int character;
+		switch(state) {
+			case byteStateHexadecimalNibbleFirst: {
+				character=fgetc(fd);
+				if(isxdigit(character)) {
+					byte=nibbleGet(character);
+					if(character=='0') {
+						state=byteStateHexadecimalHexNotation;
+					} else {
+						state=byteStateHexadecimalNibbleSecond;
+					}
+				} else if(!isblank(character)) {
+					state=byteStateHexadecimalError;
+				}
+				break;
+			}
+			case byteStateHexadecimalHexNotation: {
+				character=fgetc(fd);
+				if(tolower(character)=='x') {
+					state=byteStateHexadecimalNibbleFirst;
+				} else {
+					if(ungetc(character,fd)!=EOF) {
+						state=byteStateHexadecimalNibbleSecond;
+					} else {
+						state=byteStateHexadecimalError;
+					}
+				}
+				break;
+			}
+			case byteStateHexadecimalNibbleSecond: {
+				character=fgetc(fd);
+				if(isxdigit(character)) {
+					byte=(byte<<4)+nibbleGet(character);
+					state=byteStateHexadecimalComplete;
+				} else {
+					state=byteStateHexadecimalError;
+				}
+				break;
+			}
+			case byteStateHexadecimalError: {
+				switch(character) {
+					case EOF: {
+						byte=byteRtrnEOF;
+						break;
+					}
+					case '\n': {
+						byte=byteRtrnEOL;
+						break;
+					}
+					default: {
+						byte=byteRtrnUnknown;
+						break;
+					}
+				}
+				state=byteStateHexadecimalComplete;
+				break;
+			}
+			case byteStateHexadecimalComplete: {
+				/* Do nothing, since it's impossible to reach this stage. Just
+				 * make the compiler happy. */
+				break;
+			}
+		}
+	}
+	return(byte);
+}
+
+int byteGet(FILE *fd,enum byteBase base) {
+	int byte;
+	/* No real reason to do this, but it makes the compiler happy. If this next line is not
+	   here the compiler generates this warning below:
+
+	     warning: ‘byte’ may be used uninitialized in this function [-Wuninitialized]
+
+	   So let's initialize byte anyway.
+	*/
+	byte=0;
+
+	switch(base) {
+#define BASE(base,name,width) \
+		case name: { \
+			byte=name##Get(fd); \
+			break; \
+		}
+		BASES
+#undef BASE
+	}
+	return(byte);
+}
+
+static void byteBaseBinaryPut(FILE *fd,unsigned char byte) {
+	char bits[(sizeof(byte)*8)+1];
+	char *p;
+	for(*(p=bits+sizeof(bits)-1)='\0';p--!=bits;byte>>=1) {
+		*p='0'+(byte&0x01);
+	}
+	fprintf(fd,"%s",bits);
+}
+
+static void byteBaseHexadecimalPut(FILE *fd, unsigned char byte) {
+	fprintf(fd,"%02X",byte);
+}
+
+void bytePut(FILE *fd,enum byteBase base,unsigned char byte) {
+	switch(base) {
+#define BASE(base,name,width) \
+		case name: { \
+			name##Put(fd,byte); \
+			break; \
+		}
+		BASES
+#undef BASE
+	}
 }

@@ -40,6 +40,7 @@ OBJECTS+=checksum.o
 OBJECTS+=crc16.o
 OBJECTS+=crc8.o
 OBJECTS+=list.o
+OBJECTS+=misc.o
 
 # List of the manual pages.
 MANPAGES=jpnevulator.1.gz
@@ -86,7 +87,7 @@ dependrm:
 	rm -f dependencies.in
 	
 # Build the file that contains the dependencies. No deps in this rule.
-# If there were deps it would be rebuilt every chnage, which is unneeded:
+# If there were deps it would be rebuilt every change, which is unneeded:
 depend: dependencies.in 
 	@echo "depend"
 

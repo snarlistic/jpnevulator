@@ -30,4 +30,13 @@ typedef char bool_t;
 #define boolIsSet(x) ((x)==boolTrue)
 #define boolIsNotSet(x) ((x)==boolFalse)
 
+/* This is a nice routine to get a pointer to a string of spaces. If zero is
+ * given you will get a nice empty string. Otherwise you will get a pointer to
+ * a string of exactly the given amount of spaces. If more than the maximum
+ * amount of spaces is given, a pointer to the maximum string spaces string is
+ * returned. */
+#define __SPACES "                                                                "
+extern char __spaces[sizeof(__SPACES)];
+#define SPACES(amount) (&(__spaces[sizeof(__spaces)-min(amount,sizeof(__spaces)-1)-1]))
+
 #endif

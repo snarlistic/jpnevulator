@@ -1,4 +1,3 @@
-#ifndef __JPNEVULATOR_H
 /* jpnevulator - serial reader/writer
  * Copyright (C) 2006-2015 Freddy Spierenburg
  *
@@ -17,26 +16,7 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-#define __JPNEVULATOR_H
+#include "misc.h"
 
-#include "options.h"
-
-#define PROGRAM_NAME "jpnevulator"
-#define PROGRAM_VERSION "2.3.0"
-
-enum jpnevulatorRtrn {
-	jpnevulatorRtrnOk=0,
-	jpnevulatorRtrnOptions,
-	jpnevulatorRtrnNoTTY,
-	jpnevulatorRtrnNoInput,
-	jpnevulatorRtrnNoOutput,
-	jpnevulatorRtrnNoMessage,
-	jpnevulatorRtrnNoAscii
-};
-
-extern struct jpnevulatorOptions _jpnevulatorOptions;
-
-extern enum jpnevulatorRtrn jpnevulatorWrite(void);
-extern enum jpnevulatorRtrn jpnevulatorRead(void);
-
-#endif
+/* This is the string of spaces used by the SPACES() macro. */
+char __spaces[]=__SPACES;

@@ -1,4 +1,4 @@
-.TH JPNEVULATOR "1" "September 2015" "jpnevulator 2.2.1" "User Commands"
+.TH JPNEVULATOR "1" "December 2015" "jpnevulator 2.3.0" "User Commands"
 .SH NAME
 jpnevulator \- Just another serial sniffer
 .SH SYNOPSIS
@@ -11,15 +11,13 @@ a serial device too. You can read or write from/to one or more serial
 devices at the same time.
 .PP
 In write (\-\-write) mode data to be sent on the serial device(s) is
-read from a file or stdin in hexadecimal notation. The input format
-is FD or 0xFD. Of course all input is treated case-insensitive. Spaces
-may or may not be included in the input. So DEADBEEF is exactly the same
-as DE AD   BE  EF. Data is sent on the serial device(s) line by line.
+read from a file or stdin in base (\-\-base) defined notation. Data
+is sent on the serial device(s) line by line.
 .PP
 In read (\-\-read) mode data to be read from the serial device(s) is
-written to a file or stdout in hexadecimal notation. Skim through the
-options for several enhancements in the output. It's even possible to
-pass(\-\-pass) on the data between the several serial devices.
+written to a file or stdout in base (\-\-base) defined notation. Skim
+through the options for several enhancements in the output. It's even
+possible to pass(\-\-pass) on the data between the several serial devices.
 .PP
 Mandatory arguments to long options are mandatory for short options too.
 .PP
@@ -63,18 +61,31 @@ options section for more write specific options.
 Read options:
 .TP
 \fB\-a\fR, \fB\-\-ascii\fR
-Besides the hexadecimal output also display an extra column with the data in
-the ASCII representation. Non printable characters are displayed as a dot '.'.
-The ASCII data is displayed after the hexadecimal data.
+Besides the normal output of the data, also display an extra column with the data
+in the ASCII representation. Non printable characters are displayed as a dot '.'.
+The ASCII data is displayed after the normal data.
 .TP
 \fB\-b\fR, \fB\-\-byte\-count\fR
-Besides the hexadecimal output also display an extra column with the current
+Besides the normal output also display an extra column with the current
 index number of the byte in the output. These numbers are displayed in front
-of the hexadecimal data. When readin from multiple serial devices at the same
+of the normal output. When readin from multiple serial devices at the same
 time the index number will increase per serial device.
 .TP
-\fB\-B\fR, \fB\-\-bits\fR
-Display bits instead of hexadecimal bytes.
+\fB\-B\fR, \fB\-\-base\fR=\fIBASE\fR
+Specify the base unit of read/write bytes. Currently only 2=binary and 16=hexadecimal
+are supported. The default base unit is hexadecimal.
+
+Selecting hexadecimal as the base unit, the input format is FD or 0xFD. Of
+course all input is treated case-insensitive. Spaces may or may not be included
+in the input. So DEADBEEF is exactly the same as DE AD   BE  EF.
+
+Selecting binary as the base unit, the input format is 01000010. Spaces may or
+may not be included in the input. So 01000010111 is exactely the same as
+01000010 111. Yes, that's right! It's perfectly fine to write less than 8 bits,
+excluding the leading zeros. Please understand if doing so, spaces are needed
+to separate the individual bytes in this case, but that's obvious. If no spaces
+are used, the parses reads the first 8 bits before it continues with the next, as
+shown in the example above.
 .TP
 \fB\-C\fR, \fB\-\-control\fR
 Monitor modem control bits (line enable, data terminal ready, request to send,

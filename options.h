@@ -21,6 +21,7 @@
 
 #include "list.h"
 #include "misc.h"
+#include "byte.h"
 
 enum checksumType {
 	checksumTypeNone=0,
@@ -60,7 +61,7 @@ struct jpnevulatorOptions {
 	int count;
 	bool_t append;
 	char *appendSeparator;
-	bool_t displayBits;
+	enum byteBase base;
 };
 
 enum optionsRtrn {

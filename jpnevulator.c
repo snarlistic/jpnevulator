@@ -110,7 +110,7 @@ enum jpnevulatorRtrn jpnevulatorWrite(void) {
 	   this special remark. Not too many details, since I like to keep myself puzzeled
 	   every once in a while. ;) */
 	line=1;
-	for(index=0;(boolIsSet(writingStart)||(_jpnevulatorOptions.count!=0))&&((byte=byteGet(input))!=byteRtrnEOF);) {
+	for(index=0;(boolIsSet(writingStart)||(_jpnevulatorOptions.count!=0))&&((byte=byteGet(input,_jpnevulatorOptions.base))!=byteRtrnEOF);) {
 		if(boolIsSet(writingStart)) {
 			byte=byteRtrnEOL;
 		}
@@ -204,32 +204,21 @@ enum jpnevulatorRtrn jpnevulatorWrite(void) {
 }
 #undef jpnevulatorGarbageCollect
 
-static void printBytesBits(FILE *output, unsigned char byte) {
-        unsigned char iter = 0;
-        unsigned char bits[8];
-
-        bits[7] = byte%2 + '0';
-        for(iter=1;iter<8;++iter) {
-                unsigned char i = 0;
-                unsigned char tmp;
-                tmp = byte;
-                for(i=0;i<iter;++i)
-                     tmp /= 2;
-                bits[7-iter] = tmp%2 + '0';
-        }
-        fprintf(output,"%s",bits);
-}
-
 static void asciiWrite(FILE *output,char *ascii,int asciiSize,int *bytesWritten,bool_t fill) {
 	if((*bytesWritten)!=0) {
 		if(boolIsSet(_jpnevulatorOptions.ascii)) {
 			if(boolIsSet(fill)) {
 				int index;
 				for(index=*bytesWritten;index<_jpnevulatorOptions.width;index++) {
-					if(boolIsSet(_jpnevulatorOptions.displayBits))
-						fprintf(output,"        ");
-					else
-						fprintf(output,"   ");
+					switch(_jpnevulatorOptions.base) {
+#define BASE(base,name,width) \
+						case name: { \
+							fprintf(output,"%s",SPACES(width+1)); \
+							break; \
+						}
+						BASES
+#undef BASE
+					}
 				}
 			}
 			fprintf(output,"\t%s",ascii);
@@ -499,10 +488,7 @@ enum jpnevulatorRtrn jpnevulatorRead(void) {
 								if((bytesWritten==0)&&boolIsSet(_jpnevulatorOptions.byteCountDisplay)) {
 									fprintf(output,"%08lX\t",interfaceReader->byteCount);
 								}
-								if(boolIsSet(_jpnevulatorOptions.displayBits))
-									printBytesBits(output,message[index]);
-								else
-									fprintf(output,"%02X",message[index]);
+								bytePut(output,_jpnevulatorOptions.base,message[index]);
 								/* Increase the byte count for this interface. */
 								interfaceReader->byteCount++;
 								if(boolIsSet(_jpnevulatorOptions.ascii)) {

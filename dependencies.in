@@ -1,15 +1,18 @@
-main.o: main.c jpnevulator.h options.h list.h misc.h
-options.o: options.c options.h list.h misc.h jpnevulator.h io.h crc16.h \
- crc8.h interface.h tty.h pty.h
+main.o: main.c jpnevulator.h options.h list.h misc.h byte.h
+options.o: options.c options.h list.h misc.h byte.h jpnevulator.h io.h \
+ crc16.h crc8.h interface.h tty.h pty.h
 jpnevulator.o: jpnevulator.c jpnevulator.h options.h list.h misc.h byte.h \
  io.h interface.h checksum.h crc16.h crc8.h
 byte.o: byte.c byte.h
-interface.o: interface.c options.h list.h misc.h jpnevulator.h \
+interface.o: interface.c options.h list.h misc.h byte.h jpnevulator.h \
  interface.h
-tty.o: tty.c jpnevulator.h options.h list.h misc.h interface.h tty.h
-pty.o: pty.c jpnevulator.h options.h list.h misc.h interface.h pty.h
-io.o: io.c io.h options.h list.h misc.h jpnevulator.h
+tty.o: tty.c jpnevulator.h options.h list.h misc.h byte.h interface.h \
+ tty.h
+pty.o: pty.c jpnevulator.h options.h list.h misc.h byte.h interface.h \
+ pty.h
+io.o: io.c io.h options.h list.h misc.h byte.h jpnevulator.h
 checksum.o: checksum.c
 crc16.o: crc16.c
 crc8.o: crc8.c
 list.o: list.c list.h
+misc.o: misc.c
