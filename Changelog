@@ -1,3 +1,9 @@
+jpnevulator (???); urgency=low
+
+  * Added a .gitignore to the project.
+
+ -- Freddy Spierenburg <freddy@snarl.nl>  ???
+
 jpnevulator (2.3.1); urgency=low
 
   * Moved the --base option to the generic options section instead of the
