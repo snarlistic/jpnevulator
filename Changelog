@@ -4,8 +4,9 @@ jpnevulator (2.3.2); urgency=low
   * Added an extra question to the FAQ.
   * Fixed some minor code style issues.
   * Fixed the copyright notice, we way into 2016.
+  * Updated to Debian Standards-Version 3.9.8.
 
- -- Freddy Spierenburg <freddy@snarl.nl>  Sat, 27 Aug 2016 00:01:14 +0200
+ -- Freddy Spierenburg <freddy@snarl.nl>  Sat, 27 Aug 2016 01:05:54 +0200
 
 jpnevulator (2.3.1); urgency=low
 
