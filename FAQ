@@ -28,3 +28,28 @@ A: First the bad news: It's impossible for two GNU/Linux processes to open the
    even relatively easy to use stty to detect speed changes and act upon it. I
    leave that as an exercise to the reader, but I would love to hear from anyone
    having done it.
+
+Q: The --write mode or the --pass option is not working.
+
+A: When the first "bug report" arrived I was surprised by this myself and thought
+   indeed this was a bug. Monday July 25th I even wrote a 'bug introduced in
+   version 2.2.1' news item. But when I investigated the problem seriously it
+   of course was not. Silly me!
+
+   The problem was not a bug in the software, but incorrect terminal settings.
+   Please see the stty(1) manual page for all possible settings, but if you
+   set your terminal settings like output below, all should nicely work:
+
+   $ stty -a < /dev/ttyUSB0
+   speed 115200 baud; rows 0; columns 0; line = 0;
+   intr = ^C; quit = ^\; erase = ^?; kill = ^U; eof = ^D; eol = <undef>; eol2 = <undef>; swtch = <undef>; start = ^Q; stop = ^S; susp = ^Z; rprnt = ^R; werase = ^W; lnext = ^V;
+   flush = ^O; min = 1; time = 0;
+   -parenb -parodd -cmspar cs8 hupcl -cstopb cread clocal -crtscts
+   -ignbrk -brkint -ignpar -parmrk -inpck -istrip -inlcr -igncr -icrnl -ixon -ixoff -iuclc -ixany -imaxbel -iutf8
+   -opost -olcuc -ocrnl onlcr -onocr -onlret -ofill -ofdel nl0 cr0 tab0 bs0 vt0 ff0
+   -isig -icanon -iexten -echo echoe echok -echonl -noflsh -xcase -tostop -echoprt echoctl echoke
+   $ 
+
+   This of course if you want a speed of 115200 and no parity settings. Again,
+   please see the stty(1) manual for all possible settings if you want things
+   to behave differently.
