@@ -1,3 +1,9 @@
+jpnevulator (2.3.3); urgency=low
+
+  * Played a bit with Git tags, fucked up and now trying to correct the mess.
+
+ -- Freddy Spierenburg <freddy@snarl.nl>  Sat, 27 Aug 2016 01:08:25 +0200
+
 jpnevulator (2.3.2); urgency=low
 
   * Added a .gitignore to the project.
