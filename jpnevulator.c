@@ -1,5 +1,5 @@
 /* jpnevulator - serial reader/writer
- * Copyright (C) 2006-2015 Freddy Spierenburg
+ * Copyright (C) 2006-2016 Freddy Spierenburg
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -99,16 +99,16 @@ enum jpnevulatorRtrn jpnevulatorWrite(void) {
 	}
 
 	/* By default we do not expect to start writing because we have reached the
-	   maximum amount (--count) of bytes. */
+	 * maximum amount (--count) of bytes. */
 	boolReset(writingStart);
 
 	/* Collect and send the messages. We collect the messages byte by byte from the
 	 * input and send them on the line when we receive an end-of-line. Take notice
-	   of this rather strange test. We need to test for writingStart too, since it's
-	   possible the counter equals zero and we still need to write some bytes on the
-	   line. I myself will probably not understand why within a couple of months, hence
-	   this special remark. Not too many details, since I like to keep myself puzzeled
-	   every once in a while. ;) */
+	 * of this rather strange test. We need to test for writingStart too, since it's
+	 * possible the counter equals zero and we still need to write some bytes on the
+	 * line. I myself will probably not understand why within a couple of months, hence
+	 * this special remark. Not too many details, since I like to keep myself puzzeled
+	 * every once in a while. ;) */
 	line=1;
 	for(index=0;(boolIsSet(writingStart)||(_jpnevulatorOptions.count!=0))&&((byte=byteGet(input,_jpnevulatorOptions.base))!=byteRtrnEOF);) {
 		if(boolIsSet(writingStart)) {
@@ -165,7 +165,7 @@ enum jpnevulatorRtrn jpnevulatorWrite(void) {
 				}
 
 				/* Make sure this is reset again, otherwise we will never stop reading from stdin even though we have
-				   already refused to write more data. :) */
+				 * already refused to write more data. :) */
 				boolReset(writingStart);
 
 				/* Start again with a new message and increase the line counter. */
@@ -283,10 +283,10 @@ static void controlHandle(
 	control=interfaceControlGet(interfaceReader);
 	if(control!=interfaceReader->control) {
 		/* We need this explicit call to asciiWrite, even though headerWrite will call asciiWrite() itself probably. Yes, the probably
-		   means exactly what it says probably. It's possible that controlHandle() gets called and headerWrite() does not think it
-		   needs to write a new header and so no need to write the ascii data, but new control data will get written before the ascii
-		   data is written. That is, if the modem control bits change within the timing delta on an interface that has just received
-		   data. Blam, nasty output! This explicit call to asciiWrite() fixes that. */
+		 * means exactly what it says probably. It's possible that controlHandle() gets called and headerWrite() does not think it
+		 * needs to write a new header and so no need to write the ascii data, but new control data will get written before the ascii
+		 * data is written. That is, if the modem control bits change within the timing delta on an interface that has just received
+		 * data. Blam, nasty output! This explicit call to asciiWrite() fixes that. */
 		asciiWrite(output,ascii,asciiSize,bytesWritten,boolTrue);
 		headerWrite(output,ascii,asciiSize,bytesWritten,interfaceReader,interfaceNameCopy,interfaceNameCopySize,timeCurrent,timeLast);
 		interfaceControlWrite(interfaceReader,output,control);
@@ -331,15 +331,15 @@ enum jpnevulatorRtrn jpnevulatorRead(void) {
 		return(jpnevulatorRtrnNoOutput);
 	}
 	/* In append mode we first check if the file is empty. If not we
-	   first append the given append separator. */
+	 * first append the given append separator. */
 	if(boolIsSet(_jpnevulatorOptions.append)) {
 		struct stat outputStat;
 		fstat(fileno(output),&outputStat);
 		if(outputStat.st_size>0) {
 			char *index;
 			/* We need to parse the append separator a little bit and search for
-			   the special newline sequence. Otherwise we simply put the found
-			   character in place. */
+			 * the special newline sequence. Otherwise we simply put the found
+			 * character in place. */
 			for(index=_jpnevulatorOptions.appendSeparator;*index!='\0';index++) {
 				if((*index=='\\')&&(*(index+1)=='n')) {
 					fprintf(output,"\n");
@@ -372,12 +372,11 @@ enum jpnevulatorRtrn jpnevulatorRead(void) {
 		memset(ascii,'\0',asciiSize);
 	} else {
 		/* No real reason to do this, but it makes the compiler happy. If this next line is not
-		   here the compiler generates this warning below:
-
-		   jpnevulator.c:407:19: warning: ‘asciiSize’ may be used uninitialized in this function [-Wuninitialized]
-
-		   So let's initialize asciiSize anyway.
-		*/
+		 * here the compiler generates this warning below:
+		 *
+		 * jpnevulator.c:407:19: warning: ‘asciiSize’ may be used uninitialized in this function [-Wuninitialized]
+		 *
+		 * So let's initialize asciiSize anyway. */
 		asciiSize=0;
 	}
 
@@ -420,7 +419,7 @@ enum jpnevulatorRtrn jpnevulatorRead(void) {
 	if(boolIsSet(_jpnevulatorOptions.ascii)||boolIsSet(_jpnevulatorOptions.control)) {
 		timeoutPtr=&timeout;
 		/* What timeout shall we use? If only one of the two is activated use
-		   that one and otherwise use the smallest of the two. */
+		 * that one and otherwise use the smallest of the two. */
 		if(boolIsSet(_jpnevulatorOptions.ascii)&&boolIsSet(_jpnevulatorOptions.control)) {
 			if(_jpnevulatorOptions.timingDelta<_jpnevulatorOptions.controlPoll) {
 				timeoutReference=&_jpnevulatorOptions.timingDelta;
@@ -456,8 +455,8 @@ enum jpnevulatorRtrn jpnevulatorRead(void) {
 			 * another funny bullshit comment to give this all some kind of meaning. */
 		} else if(rtrn) {
 			/* If we have received some data, we obviously need to reset out timeout counter. Otherwise it would
-			   be considered cheating. Forgetting to reset this counter results in a slight different interpretation
-			   of the --timing-delta option. Nice BUG, luckily found it myself. */
+			 * be considered cheating. Forgetting to reset this counter results in a slight different interpretation
+			 * of the --timing-delta option. Nice BUG, luckily found it myself. */
 			timeoutCount=0;
 			/* Walk through all our interfaces and see what needs to be done. */
 			if((interfaceReader=(struct interface *)listFirst(&_jpnevulatorOptions.interface))!=NULL) {
@@ -500,7 +499,7 @@ enum jpnevulatorRtrn jpnevulatorRead(void) {
 							if(boolIsSet(_jpnevulatorOptions.pass)) {
 								struct listElement *interfaceListPosition;
 								/* Save the current position in the interface list, since we are about to traverse
-									 it again. */
+								 * it again. */
 								interfaceListPosition=listCurrentPositionSave(&_jpnevulatorOptions.interface);
 								/* Traverse the interface list again in search for all the other (not this read) interface. For
 								 * every interface found write the read message to it. */

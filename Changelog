@@ -1,8 +1,11 @@
-jpnevulator (???); urgency=low
+jpnevulator (2.3.2); urgency=low
 
   * Added a .gitignore to the project.
+  * Added an extra question to the FAQ.
+  * Fixed some minor code style issues.
+  * Fixed the copyright notice, we way into 2016.
 
- -- Freddy Spierenburg <freddy@snarl.nl>  ???
+ -- Freddy Spierenburg <freddy@snarl.nl>  Sat, 27 Aug 2016 00:01:14 +0200
 
 jpnevulator (2.3.1); urgency=low
 

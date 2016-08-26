@@ -1,5 +1,5 @@
 /* jpnevulator - serial reader/writer
- * Copyright (C) 2006-2015 Freddy Spierenburg
+ * Copyright (C) 2006-2016 Freddy Spierenburg
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,12 +39,11 @@ int byteBaseBinaryGet(FILE *fd) {
 	enum byteStateBinary state;
 
 	/* No real reason to do this, but it makes the compiler happy. If this next line is not
-	   here the compiler generates this warning below:
-
-	     warning: ‘byte’ may be used uninitialized in this function [-Wuninitialized]
-
-	   So let's initialize byte anyway.
-	*/
+	 * here the compiler generates this warning below:
+	 *
+	 *   warning: ‘byte’ may be used uninitialized in this function [-Wuninitialized]
+	 *
+	 * So let's initialize byte anyway. */
 	byte=0;
 
 	for(bitsRead=0,state=byteStateBinaryBitsIncomplete;state!=byteStateBinaryComplete;) {
@@ -120,12 +119,11 @@ int byteBaseHexadecimalGet(FILE *fd) {
 	int byte;
 	enum byteStateHexadecimal state;
 	/* No real reason to do this, but it makes the compiler happy. If this next line is not
-	   here the compiler generates this warning below:
-
-	     warning: ‘byte’ may be used uninitialized in this function [-Wuninitialized]
-
-	   So let's initialize byte anyway.
-	*/
+	 * here the compiler generates this warning below:
+	 *
+	 *   warning: ‘byte’ may be used uninitialized in this function [-Wuninitialized]
+	 *
+	 * So let's initialize byte anyway. */
 	byte=0;
 
 	for(state=byteStateHexadecimalNibbleFirst;state!=byteStateHexadecimalComplete;) {
@@ -199,12 +197,11 @@ int byteBaseHexadecimalGet(FILE *fd) {
 int byteGet(FILE *fd,enum byteBase base) {
 	int byte;
 	/* No real reason to do this, but it makes the compiler happy. If this next line is not
-	   here the compiler generates this warning below:
-
-	     warning: ‘byte’ may be used uninitialized in this function [-Wuninitialized]
-
-	   So let's initialize byte anyway.
-	*/
+	 * here the compiler generates this warning below:
+	 *
+	 *   warning: ‘byte’ may be used uninitialized in this function [-Wuninitialized]
+	 *
+	 * So let's initialize byte anyway. */
 	byte=0;
 
 	switch(base) {

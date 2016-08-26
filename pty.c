@@ -1,5 +1,5 @@
 /* jpnevulator - serial reader/writer
- * Copyright (C) 2006-2015 Freddy Spierenburg
+ * Copyright (C) 2006-2016 Freddy Spierenburg
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -48,7 +48,7 @@ static int ptyOpen(char *name,int length) {
 
 static int ptyControlGet(int fd,char *name) {
 	/* A pty does not have modem control bits, so we simply return 0. This way the interface plays nicely
-	   according to general rules and never produces any output. */
+	 * according to general rules and never produces any output. */
 	return(0);
 }
 

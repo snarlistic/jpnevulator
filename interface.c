@@ -1,5 +1,5 @@
 /* jpnevulator - serial reader/writer
- * Copyright (C) 2006-2015 Freddy Spierenburg
+ * Copyright (C) 2006-2016 Freddy Spierenburg
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -41,7 +41,7 @@ enum interfaceRtrn interfaceAdd(char *name,int (*interfaceOpen)(char *,int),int 
 	/* Was an interface name given? */
 	if(name==NULL) {
 		/* Nope. Since the interface name is optional for certain types of interfaces, make sure
-		   we have some sort of empty value to work with. */
+		 * we have some sort of empty value to work with. */
 		name="";
 	} else {
 		/* Is this interface already present in our list of interfaces? */
