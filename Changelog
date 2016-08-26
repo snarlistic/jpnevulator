@@ -1,3 +1,12 @@
+jpnevulator (2.3.4); urgency=low
+
+  * Note to self: drink less beer during a software release. Now everything
+    is in sync and I can release a proper version of the software. Stupid me!
+    Please see version 2.3.2 for the real changes in this release and
+    understand that 2.3.2, 2.3.3 and 2.3.4 are all the same.
+
+ -- Freddy Spierenburg <freddy@snarl.nl>  Sat, 27 Aug 2016 01:23:01 +0200
+
 jpnevulator (2.3.3); urgency=low
 
   * Played a bit with Git tags, fucked up and now trying to correct the mess.
