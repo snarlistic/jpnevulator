@@ -25,6 +25,9 @@ Compiling
 After this make you will have a binary called jpnevulator in the main source
 directory. You can copy this binary everywhere you like.
 
+You can also pass CC=cross-compile-gcc to the make command to build with a
+different compiler (for example to cross-compile jpnevulator) than gcc.
+
 Android binary
 ==============
 
