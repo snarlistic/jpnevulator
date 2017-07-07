@@ -46,10 +46,10 @@ OBJECTS+=misc.o
 MANPAGES=jpnevulator.1.gz
 
 # Tools 
-CLIBS=
-CFLAGS=-Wall
-LDFLAGS=
-CC=gcc
+CLIBS?=
+CFLAGS+=-Wall
+LDFLAGS?=
+CC?=gcc
 GZIP=gzip
 INSTALL=install
 
