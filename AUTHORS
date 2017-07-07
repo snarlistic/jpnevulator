@@ -6,3 +6,6 @@ AUTHORS - who wrote what on jpnevulator?
 
 	* Colin Foster <FosterCL1+jpnev@gmail.com>
 		--append functionality
+
+  * Martin Blumenstingl <https://github.com/xdarklight>
+    Added cross compilation and Android (NDK) build support

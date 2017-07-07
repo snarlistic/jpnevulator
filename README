@@ -65,6 +65,9 @@ Thanks to Ark444 for his GitHub Pull Request, he was the first! His patch
 provided binary output and I rewrote it so both the read and write mode of
 the software are able to use the binary format, see --base option.
 
+Thanks to Martin Blumenstingl for adding cross compilation and Android (NDK)
+build support.
+
 
 History
 =======

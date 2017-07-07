@@ -1,3 +1,10 @@
+jpnevulator (???); urgency=low
+
+  * (Martin Blumenstingl) Added cross compilation and Android (NDK) build
+    support.
+
+ -- Freddy Spierenburg <freddy@snarl.nl>  Fri, 07 Jul 2017 21:55:28 +0200
+
 jpnevulator (2.3.4); urgency=low
 
   * Note to self: drink less beer during a software release. Now everything
