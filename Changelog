@@ -1,9 +1,11 @@
-jpnevulator (???); urgency=low
+jpnevulator (2.3.5); urgency=low
 
   * (Martin Blumenstingl) Added cross compilation and Android (NDK) build
     support.
+  * Remove debian files. Moved them to their own repository at
+    https://github.com/snarlistic/jpnevulator-debian.
 
- -- Freddy Spierenburg <freddy@snarl.nl>  Fri, 07 Jul 2017 21:55:28 +0200
+ -- Freddy Spierenburg <freddy@snarl.nl>  Fri, 08 May 2020 21:58:20 +0200
 
 jpnevulator (2.3.4); urgency=low
 
