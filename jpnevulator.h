@@ -1,6 +1,6 @@
 #ifndef __JPNEVULATOR_H
 /* jpnevulator - serial reader/writer
- * Copyright (C) 2006-2016 Freddy Spierenburg
+ * Copyright (C) 2006-2020 Freddy Spierenburg
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
 #include "options.h"
 
 #define PROGRAM_NAME "jpnevulator"
-#define PROGRAM_VERSION "2.3.1"
+#define PROGRAM_VERSION "2.3.5"
 
 enum jpnevulatorRtrn {
 	jpnevulatorRtrnOk=0,
