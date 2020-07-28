@@ -15,4 +15,4 @@ checksum.o: checksum.c
 crc16.o: crc16.c
 crc8.o: crc8.c
 list.o: list.c list.h
-misc.o: misc.c
+misc.o: misc.c misc.h
