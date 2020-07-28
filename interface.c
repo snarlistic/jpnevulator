@@ -36,7 +36,7 @@ static int cmpr(void *p,void *q) {
 enum interfaceRtrn interfaceAdd(char *name,int (*interfaceOpen)(char *,int),int (*interfaceControlGet)(int,char *),void (*interfaceControlWrite)(FILE *,int),void (*interfaceClose)(int)) {
 	struct interface *interface;
 	int charactersPrinted;
-	char error[256];
+	char error[1024];
 	char *alias;
 	/* Was an interface name given? */
 	if(name==NULL) {
@@ -74,7 +74,7 @@ enum interfaceRtrn interfaceAdd(char *name,int (*interfaceOpen)(char *,int),int 
 	}
 	interface->fd=interfaceOpen(interface->name,sizeof(interface->name)-1);
 	if(interface->fd==-1) {
-		sprintf(error,"%s: Unable to open interface %s",PROGRAM_NAME,interface->name);
+		snprintf(error,sizeof(error)-1,"%s: Unable to open interface %s",PROGRAM_NAME,interface->name);
 		perror(error);
 		return(interfaceRtrnOpen);
 	}
