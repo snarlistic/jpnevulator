@@ -452,7 +452,10 @@ enum jpnevulatorRtrn jpnevulatorRead(void) {
 		if(rtrn==-1) {
 			/* Forgotten why, but we do not do anything here. I once must have had a
 			 * very good reason, but I can't recall anymore. Let's just put in
-			 * another funny bullshit comment to give this all some kind of meaning. */
+			 * another funny bullshit comment to give this all some kind of meaning.
+			 * I start to think it has to do something with the control option. I
+			 * don't think you want to write control information every time select
+			 * fails. But I could be wrong. It is too long ago. */
 		} else if(rtrn) {
 			/* If we have received some data, we obviously need to reset out timeout counter. Otherwise it would
 			 * be considered cheating. Forgetting to reset this counter results in a slight different interpretation
