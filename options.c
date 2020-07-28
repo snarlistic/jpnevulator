@@ -337,7 +337,7 @@ enum optionsRtrn optionsParse(int argc,char **argv) {
 			case 'v': {
 				printf(
 					"%s version %s\n"
-					"Copyright (C) 2006-2015 Freddy Spierenburg <freddy@snarl.nl>\n"
+					"Copyright (C) 2006-2020 Freddy Spierenburg <freddy@snarl.nl>\n"
 					"This is free software.  You may redistribute copies of it under the terms of\n"
 					"the GNU General Public License <http://www.gnu.org/licenses/gpl.html>.\n"
 					"There is NO WARRANTY, to the extent permitted by law.\n",

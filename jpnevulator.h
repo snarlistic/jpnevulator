@@ -22,7 +22,7 @@
 #include "options.h"
 
 #define PROGRAM_NAME "jpnevulator"
-#define PROGRAM_VERSION "2.3.5"
+#define PROGRAM_VERSION "2.3.6"
 
 enum jpnevulatorRtrn {
 	jpnevulatorRtrnOk=0,
