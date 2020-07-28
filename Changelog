@@ -1,3 +1,16 @@
+jpnevulator (2.3.6); urgency=low
+
+  * Fix potential buffer overflow problem.
+  * Added dependency on misc.h.
+  * Fix spelling errors in manual page.
+  * Clarify a bit more why a certain part of the code does exist to do nothing
+    in certain cases.
+  * Updated FAQ that more than one question is answered. Two, yes two
+    questions answered. Crazy!! It is like that for a mighty long
+    time already, but now the FAQ knows too. :)
+
+ -- Freddy Spierenburg <freddy@snarl.nl>  Tue, 28 Jul 2020 12:39:34 +0200
+
 jpnevulator (2.3.5); urgency=low
 
   * (Martin Blumenstingl) Added cross compilation and Android (NDK) build
