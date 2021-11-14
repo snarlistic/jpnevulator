@@ -56,6 +56,7 @@ static void ttyControlWrite(FILE *output,int control) {
 		control&TIOCM_RI?1:0,
 		control&TIOCM_DSR?1:0
 	);
+	fflush(output);
 }
 
 static void ttyClose(int fd) {
